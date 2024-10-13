@@ -1,0 +1,2 @@
+# dotfiles
+Hyprland, Neovim, kitty
