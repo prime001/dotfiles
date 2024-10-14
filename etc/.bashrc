@@ -46,6 +46,7 @@ alias mkvenv='python3 -m venv venv'    # Create a virtual environment
 
 # File Operations
 alias untar='tar -xvf'          # Extract a tarball
+alias ziptar='tar -czvf'        # Create a .tar.gz archive
 alias zipf='zip -r'             # Zip a folder
 alias copy='cp -r'              # Copy directories recursively
 alias mvf='mv -i'               # Prompt before overwriting files when moving
