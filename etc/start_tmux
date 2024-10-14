@@ -1,0 +1,59 @@
+#!/bin/bash
+
+# Check if tmux session exists, if not, create a new one
+SESSION_NAME="my_tmux_session"
+
+tmux has-session -t $SESSION_NAME 2>/dev/null
+
+if [ $? != 0 ]; then
+    # Prompt user for folder choice
+    echo "Select a folder to open in the first window:"
+    echo "1) ~/nso_customer_service_packages/packages"
+    echo "2) ~/nso_infrastructure_service_packages/packages"
+    echo "3) ~/Scripts"
+    read -p "Enter your choice (1, 2 or 3): " choice
+
+    # Assign folder based on user choice
+    case $choice in
+        1)
+            FOLDER="~/nso_customer_service_packages/packages"
+            ;;
+        2)
+            FOLDER="~/nso_infrastructure_service_packages/packages"
+            ;;
+
+        3)  FOLDER="~/Scripts"
+            ;;
+
+        *)
+            echo "Invalid choice, using default: ~/nso_customer_service_packages/packages"
+            FOLDER="~/nso_customer_service_packages/packages"
+            ;;
+    esac
+
+    # Create a new tmux session with a split window layout
+    tmux new-session -d -s $SESSION_NAME
+
+    # Split the window vertically (right-hand side)
+    tmux send-keys -t $SESSION_NAME:0 "nvim $FOLDER" C-m
+
+    # Split the window horizontally for the right side
+    tmux split-window -h
+
+    # Run neofetch in the top right window
+    tmux send-keys -t $SESSION_NAME:0.1 'neofetch' C-m
+
+    # Split the bottom right window for htop
+    tmux split-window -v -t $SESSION_NAME:0.1
+    tmux send-keys -t $SESSION_NAME:0.2 'htop' C-m
+
+    # Select the left window to start
+    tmux select-pane -t $SESSION_NAME:0.0
+
+
+    # Attach to the tmux session
+    tmux attach-session -t $SESSION_NAME
+else
+    # Attach to existing tmux session if it already exists
+    tmux attach-session -t $SESSION_NAME
+fi
