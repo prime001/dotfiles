@@ -20,6 +20,7 @@ alias h='history'               # Shorter alias for history command
 alias c='clear'                 # Clear the terminal screen
 
 # System Information Aliases
+alias update='sudo apt update && sudo apt upgrade -y'
 alias cpu='lscpu'               # Display CPU information
 alias meminfo='free -m -l -t'   # Show detailed memory usage
 alias disk='df -h'              # Show disk usage in human-readable format
