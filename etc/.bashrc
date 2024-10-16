@@ -45,6 +45,10 @@ alias pip='pip3'                # Use pip3
 alias venv='source venv/bin/activate'  # Activate virtual environment
 alias mkvenv='python3 -m venv venv'    # Create a virtual environment
 
+# Git Operations
+alias git_add='git status | grep "modified:" | awk '{print $2}' | xargs git add' # Adds all Modified Files to git
+alias git_push='alias gacp='git add . && git commit -m "$1" && git push' # Add Commit and Push
+
 # File Operations
 alias untar='tar -xvf'          # Extract a tarball
 alias ziptar='tar -czvf'        # Create a .tar.gz archive
