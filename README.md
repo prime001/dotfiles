@@ -8,4 +8,5 @@ start_tmux # Fires up a menu for NSO packages and displays the windows how I wan
 
 ### Files Explained
 - [x] pkglist.txt Arch Linux Packages for a quick install sudo pacman -S --needed - < pkglist.txt
+- [x] package_list.txt Ubuntu Packages for quick install sudo dpkg --set-selections < packages_list.txt | sudo apt-get dselect-upgrade
 - [ ] 
